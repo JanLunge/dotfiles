@@ -186,7 +186,8 @@ hc spawn pkill compton
 
 #hc detect_monitors
 
-#hc keybind $Mod-m set_monitors 1920x1080+0+0 1280x1440+0+1080 2560x1440+1280+1080 1280x1440+3840+1080
+hc keybind $Mod-m set_monitors 1280x1440+0+0 2560x1440+1280+0 1280x1440+3840+0
+hc keybind $Mod-n set_monitors 1110x1440+0+0 2900x1440+1110+0 1110x1440+4010+0
 #hc keybind $Mod-b set_monitors 1920x1080+0+0 1110x1440+0+1080 2900x1440+1110+1080 1110x1440+4010+1080
 #hc keybind $Mod-n set_monitors 1920x1080+0+0 5120x1440+0+1080
 #init monitors
@@ -210,7 +211,7 @@ hc set_monitors 1110x1440+0+0 2900x1440+1110+0 1110x1440+4010+0
 hc set frame_gap 10
 hc attr theme.border_width 10
 #herbstclient set window_gap 10
-hc spawn compton
+hc spawn picom
 hc spawn feh --bg-scale ~/walls/beach.jpg
 hc spawn sh $HOME/.config/polybar/launch.sh
 

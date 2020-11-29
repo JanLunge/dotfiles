@@ -24,10 +24,14 @@
 | super + r | remove frame |
 | super + space | toggle between modes of tiling inside a frame (very useful) |
 | super + tab | switch focus between windows in current desktop (very nice as this ony switches in the current desktop) |
+| super + m | make the side displays bigger |
+| super + n | side displays size back to deafault |
 
 creates 3 virtual desktops on startup left and right are used like seconday monitors the central monitor
 either uses tiling or toggles to floating mode with `super + s`
-
+you can create hotkeys to change the sizes of the virtual monitors with `hc keybind $Mod-m set_monitors 1280x1440+0+1080 2560x1440+1280+1080 1280x1440+3840+1080
+`
+ for wider side monitors when needed
 
 ## fonts used
 `yay -S ttf-fantasque-sans-git ttf-material-icons`
