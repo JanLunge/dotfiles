@@ -1,0 +1,6 @@
+# -*- mode: snippet -*-
+#name : craftrequest
+#key : craftrequest
+#contributor : Jan
+# --
+Craft::$app->request->get("$0")

@@ -1,0 +1,488 @@
+;=====================================================
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;=====================================================
+
+;==================== COLORS
+[colors]
+white = #d1d1d1
+gray = #585858
+black = #090909
+red = #c795ae
+blue = #95aec7
+yellow = #c7ae95
+green = #aec795
+
+background = #AA242424
+foreground = ${colors.white}
+background-alt = #AA223536
+foreground-alt = #55
+primary = #f8941f
+secondary = #f8941f
+alert = #bd2c40
+;background = #222
+;foreground = #dfdfdf
+
+;==================== WM
+[global/wm]
+margin-top = 5
+margin-bottom = 5
+
+;==================== Main Bar
+[bar/main]
+monitor = HDMI-0
+width = 100%
+height = 50
+offset-x = 0
+offset-y = 0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 2
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+border-bottom-size = 2
+border-bottom-color = #333
+
+spacing = 1
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = dejavuserif:pixelsize=20;6
+font-1 = "Font Awesome 5 Free Solid:pixelsize=20;7"
+;font-2 = siji:pixelsize:20;0
+
+modules-left = i3 xwindow
+modules-center =
+modules-right = volume date powermenu
+
+
+;================================
+;================================ HL bar
+;================================
+
+[bar/mainbar-herbstluftwm]
+monitor = HDMI-0
+;monitor-fallback = HDMI1
+width = 56%
+height = 35
+offset-x = 22%
+offset-y = 0.5%
+;radius = 22
+fixed-center = true
+bottom = true
+separator =
+ 
+background = ${colors.background}
+foreground = ${colors.foreground}
+ 
+line-size = 1
+line-color = #f00
+ 
+;wm-restack = bspwm
+override-redirect = true
+ 
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+enable-ipc = true
+ 
+;border-size = 1
+;border-left-size = 0
+;border-right-size = 25
+;border-top-size = 0
+;border-bottom-size = 25
+;border-color = #a16b1c
+ 
+;padding-left = 2
+padding-right = 2
+ 
+module-margin-left = 2
+module-margin-right = 2
+ 
+;https://github.com/jaagr/polybar/wiki/Fonts
+font-0 = "SF Pro Text:style=Medium;3"
+font-1 = "Font Awesome 5 Free Solid:style=Solid;3"
+font-2 = "Bauhaus:size=12;0"
+font-3 = "DejaVu Sans"
+font-4 = "Noto Color Emoji:scale=10;3"
+ 
+modules-left = ewmh xwindow
+modules-center = leftHLTag mainHLTag rightHLTag topHLTag
+modules-right =  cpu memory weather volume date powermenu
+ 
+tray-detached = false
+tray-offset-x = 2
+tray-offset-y = 0
+tray-padding = 2
+tray-maxsize = 20
+tray-scale = 1.0
+tray-position = right
+tray-background = ${colors.background}
+ 
+scroll-up = herbstclient use_index -1
+scroll-down = herbstclient use_index +1
+ 
+
+
+;==================== Mod CPU
+[module/cpu]
+type = internal/cpu
+interval = 1
+format = <label> 
+; Available tokens:
+;   %percentage% (default) - total cpu load averaged over all cores
+;   %percentage-sum% - Cumulative load on all cores
+;   %percentage-cores% - load percentage for each core
+;   %percentage-core[1-9]% - load percentage for specific core
+label = CPU %percentage%%
+
+; Spacing between individual per-core ramps
+ramp-coreload-spacing = 1
+ramp-coreload-0 = ▁
+ramp-coreload-1 = ▂
+ramp-coreload-2 = ▃
+ramp-coreload-3 = ▄
+ramp-coreload-4 = ▅
+ramp-coreload-5 = ▆
+ramp-coreload-6 = ▇
+ramp-coreload-7 = █
+
+;==================== Mod MEM
+[module/memory]
+type = internal/memory
+
+; Seconds to sleep between updates
+; Default: 1
+interval = 3
+format = <label>
+
+label = RAM %gb_free%
+
+
+;==================== Mod Vol
+[module/pavolume]
+type = internal/pulseaudio
+
+; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
+; If not, uses default sink
+sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+
+; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
+; Default: true
+use-ui-max = true
+
+; Interval for volume increase/decrease (in percent points)
+; Default: 5
+interval = 5
+
+
+[module/covid_tracker]
+type = custom/script
+exec = "$HOME/.config/polybar/covid_tracker.sh"
+interval = 600
+
+;==================== Weather
+[module/weather]
+type = custom/script
+exec = curl -s wttr.in/hamburg?format=2
+interval = 3600
+
+;====================
+;==================== Herbstluft Bar unused
+;====================
+
+[bar/mainbar-herbstluftwm-extra]
+monitor = HDMI-0
+;monitor-fallback = HDMI1
+width = 100%
+height = 36
+;offset-x = 1%
+;offset-y = 1%
+;radius = 5.0
+fixed-center = true
+bottom = true
+separator = |
+ 
+background = ${colors.background}
+foreground = ${colors.foreground}
+ 
+line-size = 2
+line-color = #fff
+ 
+wm-restack = bspwm
+override-redirect = true
+ 
+; Enable support for inter-process messaging
+; See the Messaging wiki page for more details.
+enable-ipc = true
+ 
+border-size = 0
+;border-left-size = 0
+;border-right-size = 25
+;border-top-size = 0
+;border-bottom-size = 25
+border-color = #00000000
+ 
+padding-left = 0
+padding-right = 1
+ 
+module-margin-left = 3
+module-margin-right = 3
+ 
+;https://github.com/jaagr/polybar/wiki/Fonts
+font-0 = "Noto Sans:size=10;0"
+font-1 = "FontAwesome:size=13;0"
+font-2 = "Noto Sans:size=10;0"
+font-3 = "Noto Sans Mono:size=10;0"
+ 
+modules-left = load-average
+modules-center = networkspeeddown networkspeedup
+modules-right = filesystem
+ 
+;tray-detached = false
+;tray-offset-x = 0
+;tray-offset-y = 0
+;tray-padding = 2
+;tray-maxsize = 20
+;tray-scale = 1.0
+;tray-position = right
+;tray-background = ${colors.background}
+ 
+scroll-up = herbstclient use_index -1
+scroll-down = herbstclient use_index +1
+ 
+ 
+;====================================================== HL Workspaces
+[module/ewmh]
+type = internal/xworkspaces
+ 
+pin-workspaces = true
+enable-click = true
+enable-scroll = true
+reverse-scroll = true
+ 
+ 
+icon-0 = 1;
+icon-1 = 2;
+icon-2 = 3;
+icon-3 = 4;
+icon-4 = 5;
+#icon-5 = 6;
+format = <label-state>
+label-monitor = %name%
+ 
+label-active = %name%
+label-active-foreground = #222
+label-active-background = ${colors.primary}
+;label-active-underline= #6790eb
+label-active-padding = 4
+ 
+label-occupied = %name% U
+label-occupied-background = ${colors.red}
+label-occupied-padding = 4
+ 
+label-urgent = %name%
+label-urgent-foreground = ${colors.foreground}
+label-urgent-background = ${colors.alert}
+label-urgent-underline = ${colors.alert}
+label-urgent-padding = 4
+ 
+ 
+label-empty = %name%
+label-empty-foreground = ${colors.foreground}
+label-empty-padding = 4
+format-foreground = ${colors.foreground}
+format-background = ${colors.background}
+
+[bar/second]
+monitor = HDMI-0
+width = 100%
+height = 50
+offset-x = 0
+offset-y = 0
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+overline-size = 2
+overline-color = #f00
+underline-size = 2
+underline-color = #00f
+
+border-bottom = 2
+border-bottom-color = #333
+
+spacing = 1
+padding-left = 0
+padding-right = 2
+module-margin-left = 1
+module-margin-right = 2
+
+font-0 = dejavuserif:pixelsize=20;6
+font-1 = "Font Awesome 5 Free Solid:pixelsize=20;7"
+;font-0 = dejavuserif:pixelsize=14;2
+;font-1 = fontawesome:pixelsize=15;3
+font-2 = "Siji:style=Regular"
+font-3 = "Unifont:style=Sans-Serif"
+
+modules-left = i3 xwindow
+modules-center =
+modules-right = volume date
+
+[module/xwindow]
+type = internal/xwindow
+label = %title:0:25:...%
+
+[module/mainHLTag]
+type = custom/script
+exec = herbstclient list_monitors |grep "0:"| cut -d ' ' -f 5|tr -d '"'
+interval= 3
+
+[module/leftHLTag]
+type = custom/script
+exec = herbstclient list_monitors |grep "1:"| cut -d ' ' -f 5|tr -d '"'
+interval= 3
+
+[module/rightHLTag]
+type = custom/script
+exec = herbstclient list_monitors |grep "2:"| cut -d ' ' -f 5|tr -d '"'
+interval= 3
+
+[module/topHLTag]
+type = custom/script
+exec = herbstclient list_monitors |grep "3:"| cut -d ' ' -f 5|tr -d '"'
+interval= 3
+
+[module/bspwm]
+type = internal/bspwm
+ws-icon-default = x
+
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
+label-focused-padding = 2
+
+label-occupied = %index%
+label-occupied-padding = 2
+
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 2
+
+label-empty = %index%
+label-empty-foreground = ${colors.foreground-alt}
+label-empty-padding = 2
+
+[module/i3]
+type = internal/i3
+format = <label-state> <label-mode>
+index-sort = true
+
+label-mode = %mode%
+label-mode-padding = 2
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
+
+label-focused = %index%
+label-focused-background = ${module/bspwm.label-focused-background}
+label-focused-underline = ${module/bspwm.label-focused-underline}
+label-focused-padding = ${module/bspwm.label-focused-padding}
+
+label-unfocused = %index%
+label-unfocused-padding = ${module/bspwm.label-occupied-padding}
+
+label-urgent = %index%!
+label-urgent-background = ${colors.alert}
+label-urgent-padding = ${module/bspwm.label-urgent-padding}
+
+label-visible = %index%
+label-visible-foreground = ${module/bspwm.label-empty-padding}
+label-visible-padding = ${module/bspwm.label-empty-padding}
+
+[module/date]
+type = internal/date
+interval = 5
+
+date = " %d.%m.%y"
+date-alt = " %Y.%m.%d"
+
+time = " %H:%M"
+time-alt = " %H:%M:%S"
+
+format-prefix = 
+format-prefix-foreground = ${colors.foreground-alt}
+format-underline = ${colors.primary}
+
+label = %date% %time%
+
+[module/volume]
+type = internal/alsa
+
+; Soundcard to be used
+master-soundcard = default
+speaker-soundcard = default
+headphone-soundcard = default
+
+; Name of the master mixer
+; Default: Master
+master-mixer = Master
+
+format-volume = <label-volume> <bar-volume>
+label-volume = 
+label-volume-foreground = ${root.foreground}
+
+format-muted-prefix = " "
+format-muted-foreground = ${colors.foreground-alt}
+label-muted =  sound muted
+
+bar-volume-width = 8
+bar-volume-foreground-0 = #55aa55
+bar-volume-foreground-1 = #55aa55
+bar-volume-foreground-2 = #55aa55
+bar-volume-foreground-3 = #55aa55
+bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-5 = #f5a70a
+bar-volume-foreground-6 = #ff5555
+bar-volume-gradient = false
+bar-volume-indicator = 
+bar-volume-indicator-font = 2
+bar-volume-indicator-foreground = #ff
+bar-volume-fill = x
+bar-volume-fill-font = 2
+bar-volume-empty = -
+bar-volume-empty-font = 2
+bar-volume-empty-foreground = ${colors.foreground-alt}
+
+[module/powermenu]
+type = custom/menu
+
+label-open = Power 
+label-open-foreground = ${colors.primary}
+label-close =  cancel
+label-close-foreground = ${colors.primary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 = reboot
+menu-0-0-exec = menu-open-1
+menu-0-1 = power off
+menu-0-1-exec = menu-open-2
+
+menu-1-0 = cancel
+menu-1-0-exec = menu-open-0
+menu-1-1 = reboot
+menu-1-1-exec = "xdotool search --classname navigator key ctrl+q; sleep 2; sudo reboot"
+
+menu-2-0 = power off
+menu-2-0-exec = "xdotool search --classname navigator key ctrl+q; sleep 2; sudo poweroff"
+menu-2-1 = cancel
+menu-2-1-exec = menu-open-0

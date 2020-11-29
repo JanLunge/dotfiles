@@ -1,0 +1,7 @@
+# -*- mode: snippet -*-
+# name: set merge
+# key: merge
+# --
+{% set $1 = $1|merge([
+$2
+])) %}

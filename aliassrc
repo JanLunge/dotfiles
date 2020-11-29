@@ -1,0 +1,141 @@
+#!/bin/bash
+function updateMusic(){
+  cd ~/Music/Youtube/
+  youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-post-overwrites -ciwx --embed-thumbnail --add-metadata --download-archive downloaded.txt --output '%(playlist)s/%(title)s - %(id)s.%(ext)s' PLdbIj_aeQsBZnF-dX8Pk_BrU-AidCUP_G
+}
+
+#create dir and enter it
+function mkd() {
+	mkdir -p "$@" && cd "$_";
+}
+# Change working directory to the top-most Finder window location
+function cdf() { # short for `cdfinder`
+	cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
+}
+#finder
+alias hide='chflags hidden'
+alias unhide='chflags nohidden'
+alias showFiles="defaults write com.apple.Finder AppleShowAllFiles true && killall Finder"
+alias hideFiles="defaults write com.apple.Finder AppleShowAllFiles false && killall Finder"
+
+#git
+alias ga="git add"
+alias gam="git ls-files --modified | xargs git add"
+alias gc="git commit -m"
+alias gs="git status"
+alias gd="git diff"
+alias gf="git fetch"
+alias gm="git merge"
+alias gr="git rebase"
+alias gp="git push"
+alias gpl="git pull"
+alias gu="git unstage"
+alias gg="git graph"
+alias gco="git checkout"
+alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
+
+#sudo
+alias fuck='sudo $(fc -ln -1)'
+alias please='sudo'
+
+#docker
+function undockall {
+    docker stop $(docker ps -a -q)
+}
+alias d="docker"
+alias dc="docker-compose"
+alias dce="docker-compose exec"
+
+# Go development
+#test -d "${GOPATH}" || mkdir "${GOPATH}"
+#test -d "${GOPATH}/src/github.com" || mkdir -p "${GOPATH}/src/github.com"
+
+
+# ZSH Setup
+#export GOROOT="$(brew --prefix golang)/libexec"
+#export GOROOT="/usr/local/Cellar/go/1.11.1/libexec"
+
+#export PATH="$PATH:${GOPATH}/bin:${GOROOT}/bin"
+export PATH="$PATH:$HOME/go/bin"
+
+# Zippin
+alias gz='tar -zcvf'
+
+# Easier navigation: .., ..., ...., ....., ~ and -
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias .....="cd ../../../.."
+alias ~="cd ~" # `cd` is probably faster to type though
+alias -- -="cd -"
+
+
+# Get week number
+alias week='date +%V'
+
+# Get macOS Software Updates, and update installed Ruby gems, Homebrew, npm, and their installed packages
+alias update='sudo softwareupdate -i -a; brew update; brew upgrade; brew cleanup; npm install npm -g; npm update -g; sudo gem update --system; sudo gem update; sudo gem cleanup'
+
+# Google Chrome
+alias chrome='/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome'
+alias canary='/Applications/Google\ Chrome\ Canary.app/Contents/MacOS/Google\ Chrome\ Canary'
+
+# IP addresses
+alias ip="dig +short myip.opendns.com @resolver1.opendns.com"
+alias localip="ipconfig getifaddr en0"
+alias ips="ifconfig -a | grep -o 'inet6\? \(addr:\)\?\s\?\(\(\([0-9]\+\.\)\{3\}[0-9]\+\)\|[a-fA-F0-9:]\+\)' | awk '{ sub(/inet6? (addr:)? ?/, \"\"); print }'"
+
+# macOS has no `md5sum`, so use `md5` as a fallback
+command -v md5sum > /dev/null || alias md5sum="md5"
+
+# macOS has no `sha1sum`, so use `shasum` as a fallback
+command -v sha1sum > /dev/null || alias sha1sum="shasum"
+
+# Trim new lines and copy to clipboard
+alias c="tr -d '\n' | pbcopy"
+
+# Recursively delete `.DS_Store` files
+alias cleanup="find . -type f -name '*.DS_Store' -ls -delete"
+
+# Hide/show all desktop icons (useful when presenting)
+alias hidedesktop="defaults write com.apple.finder CreateDesktop -bool false && killall Finder"
+alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && killall Finder"
+
+# Intuitive map function
+# For example, to list all directories that contain a certain file:
+# find . -name .gitattributes | map dirname
+alias map="xargs -n1"
+
+# One of @janmoesen’s ProTip™s
+for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+	alias "${method}"="lwp-request -m '${method}'"
+done
+
+# Stuff I never really use but cannot delete either because of http://xkcd.com/530/
+alias stfu="osascript -e 'set volume output muted true'"
+alias pumpitup="osascript -e 'set volume output volume 100'"
+
+# Kill all the tabs in Chrome to free up memory
+# [C] explained: http://www.commandlinefu.com/commands/view/402/exclude-grep-from-your-grepped-output-of-ps-alias-included-in-description
+alias chromekill="ps ux | grep '[C]hrome Helper --type=renderer' | grep -v extension-process | tr -s ' ' | cut -d ' ' -f2 | xargs kill"
+
+# Lock the screen (when going AFK)
+alias afk="/System/Library/CoreServices/Menu\ Extras/User.menu/Contents/Resources/CGSession -suspend"
+
+# Reload the shell (i.e. invoke as a login shell)
+alias reload="exec ${SHELL} -l"
+
+# Print each PATH entry on a separate line
+alias path='echo -e ${PATH//:/\\n}'
+
+# WSL Windows stuff
+
+# start ssh
+alias startssh="sudo service ssh start"
+
+alias cp="cp -i"                          # confirm before overwriting something
+alias df='df -h'                          # human-readable sizes
+alias free='free -m'                      # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less
+alias hc="herbstclient"
