@@ -10,6 +10,7 @@
 
 ## HLWM
 | key | Action |
+| --: | :----- |
 | super + d | Rofi |
 | super + y | Power menu in Rofi |
 | super + [1-9] | switch to desktop |
