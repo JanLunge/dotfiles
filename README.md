@@ -7,6 +7,7 @@
 * polybar
 * rofi
 * dunst
+* lightdm
 
 ## HLWM
 | key | Action |
