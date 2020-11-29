@@ -9,19 +9,19 @@
 * dunst
 
 ## HLWM
-| key | Action|
-| super + d | Rofi|
-|super + y | Power menu in Rofi|
-|super + [1-9] | switch to desktop|
-|super + shift +[1-9] | move window to desktop|
-|super + shift + arrow | move window in direction|
-|super + f | fullscreen window|
-|super + s | floating mode on current desktop|
-|super + u | create frame under current frame|
-|super + o | create frame right to current frame|
-|super + r | remove frame|
-|super + space | toggle between modes of tiling inside a frame (very useful)|
-|super + tab | switch focus between windows in current desktop (very nice as this ony switches in the current desktop)|
+| key | Action |
+| super + d | Rofi |
+| super + y | Power menu in Rofi |
+| super + [1-9] | switch to desktop |
+| super + shift +[1-9] | move window to desktop |
+| super + shift + arrow | move window in direction |
+| super + f | fullscreen window |
+| super + s | floating mode on current desktop |
+| super + u | create frame under current frame |
+| super + o | create frame right to current frame |
+| super + r | remove frame |
+| super + space | toggle between modes of tiling inside a frame (very useful) |
+| super + tab | switch focus between windows in current desktop (very nice as this ony switches in the current desktop) |
 
 creates 3 virtual desktops on startup left and right are used like seconday monitors the central monitor
 either uses tiling or toggles to floating mode with `super + s`
