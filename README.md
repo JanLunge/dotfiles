@@ -1,7 +1,8 @@
 
-# Arch setup (currently Manjaro)
+# Arch setup
 
 ![screenshot](https://github.com/wlard/dotfiles/blob/master/screenshot.png?raw=true)
+video walkthrough at [Youtube/JanLunge](https://youtu.be/MOHx2dXb-uk)
 
 * herbstluftwm
 * polybar
