@@ -9,6 +9,13 @@
 * dunst
 * lightdm
 
+* redshift
+* nitrogen
+
+## Snippets
+  `ln -s ~/dotfiles/.zshrc ~/.zshrc` for linking dotfiles to the right place
+
+
 ## HLWM
 | key | Action |
 | --: | :----- |
@@ -24,8 +31,6 @@
 | super + r | remove frame |
 | super + space | toggle between modes of tiling inside a frame (very useful) |
 | super + tab | switch focus between windows in current desktop (very nice as this ony switches in the current desktop) |
-| super + m | make the side displays bigger |
-| super + n | side displays size back to deafault |
 
 creates 3 virtual desktops on startup left and right are used like seconday monitors the central monitor
 either uses tiling or toggles to floating mode with `super + s`
@@ -41,13 +46,3 @@ git clone https://github.com/syl20bnr/spacemacs ~/.emacs.d
 ## maintainance
 logfiles for terminal usage `sudo rm -rf /private/var/log/asl/*.asl`
 zsh history `mv ~/.zsh_history ~/zsh_history_backup`
-
-## Snippets
-  `ln -s ~/dotfiles/.zshrc ~/.zshrc` for linking dotfiles to the right place
-
-
-
-## Arduino and Nodemcu (esp8266)
-- driver https://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers
-- boards manager http://arduino.esp8266.com/stable/package_esp8266com_index.json
--most recent boards manager url https://github.com/esp8266/Arduino#installing-with-boards-manager
