@@ -10,7 +10,7 @@
 
 # Enable colors and change prompt:
 autoload -U colors && colors
-PS1="%B%{$fg[red]%}[%{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%} $%b "$'\n'"%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M%{$fg[red]%}]%{$reset_color%} > %b"
+PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%~%{$fg[red]%}]%{$reset_color%} $%b "$'\n'"%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M%{$fg[red]%}]%{$reset_color%} > %b"
 
 # History in cache directory:
 HISTSIZE=10000
@@ -110,10 +110,11 @@ PERL5LIB="/home/jan/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
 PERL_LOCAL_LIB_ROOT="/home/jan/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
 PERL_MB_OPT="--install_base \"/home/jan/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/jan/perl5"; export PERL_MM_OPT;
+# install lscolors-git from aur
+. /usr/share/LS_COLORS/dircolors.sh
+export TERM="xterm-256color"
+export PATH="$PATH:`yarn global bin`"
 
 
 # Load zsh-syntax-highlighting; should be last.
-source /usr/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh 2>/dev/null
-
-export TERM="xterm-256color"
-export PATH="$PATH:`yarn global bin`"
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

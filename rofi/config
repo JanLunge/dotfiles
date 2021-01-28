@@ -11,5 +11,5 @@
 # rofi.bw:		2
 # rofi.padding:		0
 # rofi.fixed-num-lines:	true
-# rofi.theme:		vapor.rasi
+# rofi.theme:		slate.rasi
 # rofi.yoffset:		130

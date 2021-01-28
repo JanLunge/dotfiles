@@ -17,7 +17,7 @@ blue = #95aec7
 yellow = #c7ae95
 green = #aec795
 
-background = #AA242424
+background = #eA242424
 foreground = ${colors.white}
 background-alt = #AA223536
 foreground-alt = #55
@@ -32,9 +32,9 @@ alert = #bd2c40
 margin-top = 5
 margin-bottom = 5
 
-;==================== Main Bar
+;==================== i3 Bar
 [bar/main]
-monitor = HDMI-0
+;monitor = HDMI-0
 width = 100%
 height = 50
 offset-x = 0
@@ -59,6 +59,8 @@ module-margin-right = 2
 
 font-0 = dejavuserif:pixelsize=20;6
 font-1 = "Font Awesome 5 Free Solid:pixelsize=20;7"
+font-2 = unifont:fontformat=truetype:size=8:antialias=false;0
+
 ;font-2 = siji:pixelsize:20;0
 
 modules-left = i3 xwindow
@@ -71,24 +73,19 @@ modules-right = volume date powermenu
 ;================================
 
 [bar/mainbar-herbstluftwm]
-monitor = HDMI-0
-;monitor-fallback = HDMI1
-width = 56%
+;monitor = HDMI-0
+width = 2520px
 height = 35
-offset-x = 22%
-offset-y = 0.5%
+offset-x = 1300px
+offset-y = 2px
 ;radius = 22
 fixed-center = true
-bottom = true
+bottom = false
 separator =
- 
 background = ${colors.background}
 foreground = ${colors.foreground}
- 
 line-size = 1
 line-color = #f00
- 
-;wm-restack = bspwm
 override-redirect = true
  
 ; Enable support for inter-process messaging
@@ -109,15 +106,17 @@ module-margin-left = 2
 module-margin-right = 2
  
 ;https://github.com/jaagr/polybar/wiki/Fonts
-font-0 = "SF Pro Text:style=Medium;3"
+font-0 = "Misc Tamsyn:style=Regular:pixelsize=16;3"
 font-1 = "Font Awesome 5 Free Solid:style=Solid;3"
-font-2 = "Bauhaus:size=12;0"
-font-3 = "DejaVu Sans"
-font-4 = "Noto Color Emoji:scale=10;3"
+font-2 = "Siji:style=Regular"
+;font-2 = "Unifont:style=Sans-Serif:size=8:antialias=false;0"
+;font-2 = "Bauhaus:size=12;0"
+;font-3 = "DejaVu Sans=12;0"
+;font-2 = "Noto Color Emoji:scale=10;3"
  
-modules-left = ewmh xwindow
-modules-center = leftHLTag mainHLTag rightHLTag topHLTag
-modules-right =  cpu memory weather volume date powermenu
+modules-left = info-hlwm-workspaces
+modules-center = hlwm-monitor0
+modules-right = monitor_aspect follows_mouse cpu memory temperature gputemp volume date powermenu
  
 tray-detached = false
 tray-offset-x = 2
@@ -131,6 +130,21 @@ tray-background = ${colors.background}
 scroll-up = herbstclient use_index -1
 scroll-down = herbstclient use_index +1
  
+[module/info-hlwm-workspaces]
+type = custom/script
+exec = /home/jan/.config/polybar/polybar-scripts/info-hlwm-workspaces/info-hlwm-workspaces.sh
+tail = true
+scroll-up = herbstclient use_index -1 --skip-visible &
+scroll-down = herbstclient use_index +1 --skip-visible &
+label-active-font=1
+[module/hlwm-monitor0]
+type = custom/script
+exec = /home/jan/.config/polybar/hlwm-monitor0.sh
+tail = true
+scroll-up = herbstclient use_index -1 --skip-visible &
+scroll-down = herbstclient use_index +1 --skip-visible &
+
+
 
 
 ;==================== Mod CPU
@@ -174,7 +188,7 @@ type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
 ; If not, uses default sink
-sink = alsa_output.pci-0000_00_1f.3.analog-stereo
+;sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 
 ; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
 ; Default: true
@@ -344,22 +358,26 @@ label = %title:0:25:...%
 
 [module/mainHLTag]
 type = custom/script
-exec = herbstclient list_monitors |grep "0:"| cut -d ' ' -f 5|tr -d '"'
-interval= 3
+exec = /home/jan/.config/polybar/hlwm-monitor-tag.sh 2
+tail = true
+scroll-up = herbstclient use_index -1 --skip-visible &
+scroll-down = herbstclient use_index +1 --skip-visible &
 
 [module/leftHLTag]
 type = custom/script
 exec = herbstclient list_monitors |grep "1:"| cut -d ' ' -f 5|tr -d '"'
-interval= 3
+tail = true
+scroll-up = herbstclient use_index -1 --skip-visible &
+scroll-down = herbstclient use_index +1 --skip-visible &
 
 [module/rightHLTag]
 type = custom/script
-exec = herbstclient list_monitors |grep "2:"| cut -d ' ' -f 5|tr -d '"'
+exec = herbstclient list_monitors |grep "3:"| cut -d ' ' -f 5|tr -d '"'
 interval= 3
 
 [module/topHLTag]
 type = custom/script
-exec = herbstclient list_monitors |grep "3:"| cut -d ' ' -f 5|tr -d '"'
+exec = herbstclient list_monitors |grep "0:"| cut -d ' ' -f 5|tr -d '"'
 interval= 3
 
 [module/bspwm]
@@ -453,13 +471,13 @@ bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
-bar-volume-indicator = 
-bar-volume-indicator-font = 2
+bar-volume-indicator = |
+;bar-volume-indicator-font = 3
 bar-volume-indicator-foreground = #ff
-bar-volume-fill = x
-bar-volume-fill-font = 2
+bar-volume-fill = -
+;bar-volume-fill-font = 3
 bar-volume-empty = -
-bar-volume-empty-font = 2
+;bar-volume-empty-font = 3
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
 [module/powermenu]
@@ -486,3 +504,41 @@ menu-2-0 = power off
 menu-2-0-exec = "xdotool search --classname navigator key ctrl+q; sleep 2; sudo poweroff"
 menu-2-1 = cancel
 menu-2-1-exec = menu-open-0
+[module/gputemp]
+type = custom/script
+exec = /home/jan/.config/polybar/gpu-temp.sh
+interval = 5
+
+[module/follows_mouse]
+type = custom/script
+exec = /home/jan/.config/polybar/follows_mouse.sh
+interval = 5
+click-left = herbstclient set focus_follows_mouse toggle
+
+[module/monitor_aspect]
+type = custom/script
+exec = /home/jan/.config/polybar/monitor_aspect.sh
+interval = 5
+click-left = /home/jan/.config/polybar/monitor_aspect_toggle.sh
+click-right = herbstclient floating toggle
+
+
+[module/temperature]
+type = internal/temperature
+thermal-zone = 0
+warn-temperature = 60
+
+format = <ramp> <label>
+format-underline = #f50a4d
+format-warn = <ramp> <label-warn>
+format-warn-underline = ${self.format-underline}
+
+label = %temperature-c%
+label-warn = %temperature-c%
+label-warn-foreground = ${colors.secondary}
+
+ramp-0 = 
+ramp-1 = 
+ramp-2 = 
+ramp-foreground = ${colors.foreground-alt}
+
