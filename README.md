@@ -16,6 +16,8 @@ video walkthrough at [Youtube/JanLunge](https://youtu.be/MOHx2dXb-uk)
 ## Snippets
   `ln -s ~/dotfiles/.zshrc ~/.zshrc` for linking dotfiles to the right place
 
+## Wallpaper
+the wallpaper in the screenshot and video is from martin adams on unsplash https://unsplash.com/photos/pTCcJSBOTxY and i did a orange tinted version of it which you can grab here https://mega.nz/file/JJNE3RxQ#hq8Nu0AS0gxRamExpBnZt9c85SyDJKN3BgETbXhGSOo
 
 ## HLWM
 | key | Action |
