@@ -33,8 +33,8 @@ values."
      go
      lua
      ;;testing
-     (auto-completion :variables
-      auto-completion-enable-snippets-in-popup t)
+     ;;(auto-completion :variables
+     ;; auto-completion-enable-snippets-in-popup t)
      better-defaults
      git
      evil-commentary
@@ -353,6 +353,7 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq tab-always-indent 'tab)
   (set-frame-parameter (selected-frame) 'alpha '(80 . 80))
   (add-to-list 'default-frame-alist '(alpha . (80 . 80)))
 
@@ -444,7 +445,7 @@ you should place your code here."
   (require 'prettier-js)
   ;;(add-hook 'vue-mode-hook #'prettier-js-mode)
   (add-hook 'web-mode-hook #'prettier-js-mode)
-  (define-key global-map (kbd "<tab>") 'hippie-expand)
+  ;; (define-key global-map (kbd "<tab>") 'hippie-expand)
   (global-display-line-numbers-mode 1)
   (setq mac-option-key-is-meta nil
         mac-command-key-is-meta t

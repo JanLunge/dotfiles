@@ -1,5 +1,7 @@
 [options]
-font = Inconsolata 18px
+# font = Inconsolata 18px
+# font = FiraCode Nerd Font Mono 18px
+font = mononoki Nerd Font 18px
 # Copyright (c) 2016-present Arctic Ice Studio <development@arcticicestudio.com>
 # Copyright (c) 2016-present Sven Greb <code@svengreb.de>
 

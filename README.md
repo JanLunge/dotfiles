@@ -13,6 +13,12 @@ video walkthrough at [Youtube/JanLunge](https://youtu.be/MOHx2dXb-uk)
 * redshift
 * nitrogen
 
+## Dependencies
+`jq` is used for some json bash script parsing
+
+## WIP
+- there is a DISPLAY menu in polybar that is a simple menu with `xmenu` for toggling screens or the compositor on and off
+
 ## Snippets
   `ln -s ~/dotfiles/.zshrc ~/.zshrc` for linking dotfiles to the right place
 

@@ -24,11 +24,8 @@ foreground-alt = #55
 primary = #f8941f
 secondary = #f8941f
 alert = #bd2c40
-;background = #222
-;foreground = #dfdfdf
 
 [variables]
-;main-monitor=HDMI-1
 main-monitor=DP-2
 
 ;==================== WM
@@ -36,53 +33,21 @@ main-monitor=DP-2
 margin-top = 5
 margin-bottom = 5
 
-;==================== i3 Bar
-[bar/main]
-;monitor = HDMI-0
-width = 100%
-height = 50
-offset-x = 0
-offset-y = 0
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-overline-size = 2
-overline-color = #f00
-underline-size = 2
-underline-color = #00f
-
-border-bottom-size = 2
-border-bottom-color = #333
-
-spacing = 1
-padding-left = 0
-padding-right = 2
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = dejavuserif:pixelsize=20;6
-font-1 = "Font Awesome 5 Free Solid:pixelsize=20;7"
-font-3 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = "mononoki Nerd Font Mono:size=12;0"
-;font-2 = siji:pixelsize:20;0
-
-modules-left = i3 xwindow
-modules-center =
-modules-right = volume date powermenu
-
 
 ;================================
-;================================ HL bar
+;================================ herbstluftWM bar
 ;================================
 
 [bar/mainbar-herbstluftwm]
 monitor = ${variables.main-monitor}
+override-redirect = true
+enable-ipc = true
+
 width = 2520px
 height = 35
 offset-x = 1300px
 offset-y = 2px
-;radius = 22
+
 fixed-center = true
 bottom = false
 separator =
@@ -90,22 +55,8 @@ background = ${colors.background}
 foreground = ${colors.foreground}
 line-size = 1
 line-color = #f00
-override-redirect = true
- 
-; Enable support for inter-process messaging
-; See the Messaging wiki page for more details.
-enable-ipc = true
- 
-;border-size = 1
-;border-left-size = 0
-;border-right-size = 25
-;border-top-size = 0
-;border-bottom-size = 25
-;border-color = #a16b1c
- 
-;padding-left = 2
+
 padding-right = 2
- 
 module-margin-left = 2
 module-margin-right = 2
  
@@ -113,14 +64,10 @@ module-margin-right = 2
 font-0 = "Misc Tamsyn:style=Regular:pixelsize=16;3"
 font-1 = "Font Awesome 5 Free Solid:style=Solid;3"
 font-2 = "Siji:style=Regular"
-;font-2 = "Unifont:style=Sans-Serif:size=8:antialias=false;0"
-;font-2 = "Bauhaus:size=12;0"
-;font-3 = "DejaVu Sans=12;0"
-;font-2 = "Noto Color Emoji:scale=10;3"
- 
+
 modules-left = info-hlwm-workspaces
 modules-center = hlwm-monitor0
-modules-right = monitor_toggle monitor_aspect follows_mouse cpu memory temperature volume date powermenu
+modules-right = weather monitor_toggle monitor_aspect follows_mouse cpu memory temperature volume date powermenu
  
 tray-detached = false
 tray-offset-x = 2
@@ -133,14 +80,21 @@ tray-background = ${colors.background}
  
 scroll-up = herbstclient use_index -1
 scroll-down = herbstclient use_index +1
- 
+
+;================================
+;================================ Modules
+;================================
+
+; HLWM workspace info
+
 [module/info-hlwm-workspaces]
 type = custom/script
-exec = /home/jan/.config/polybar/polybar-scripts/info-hlwm-workspaces/info-hlwm-workspaces.sh
+exec = /home/jan/.config/polybar/info-hlwm-workspaces/info-hlwm-workspaces.sh
 tail = true
 scroll-up = herbstclient use_index -1 --skip-visible &
 scroll-down = herbstclient use_index +1 --skip-visible &
 label-active-font=1
+
 [module/hlwm-monitor0]
 type = custom/script
 exec = /home/jan/.config/polybar/hlwm-monitor0.sh
@@ -156,14 +110,7 @@ scroll-down = herbstclient use_index +1 --skip-visible &
 type = internal/cpu
 interval = 1
 format = <label> 
-; Available tokens:
-;   %percentage% (default) - total cpu load averaged over all cores
-;   %percentage-sum% - Cumulative load on all cores
-;   %percentage-cores% - load percentage for each core
-;   %percentage-core[1-9]% - load percentage for specific core
 label = CPU %percentage%%
-
-; Spacing between individual per-core ramps
 ramp-coreload-spacing = 1
 ramp-coreload-0 = ▁
 ramp-coreload-1 = ▂
@@ -177,41 +124,24 @@ ramp-coreload-7 = █
 ;==================== Mod MEM
 [module/memory]
 type = internal/memory
-
-; Seconds to sleep between updates
-; Default: 1
 interval = 3
 format = <label>
-
 label = RAM %gb_free%
 
 
-;==================== Mod Vol
+;==================== simpler volume module no slider
 [module/pavolume]
 type = internal/pulseaudio
 
 ; Sink to be used, if it exists (find using `pacmd list-sinks`, name field)
-; If not, uses default sink
-;sink = alsa_output.pci-0000_00_1f.3.analog-stereo
 sink = alsa_output.pci-0000_0e_00.4.iec958-stereo
-; Use PA_VOLUME_UI_MAX (~153%) if true, or PA_VOLUME_NORM (100%) if false
-; Default: true
 use-ui-max = false
-
-; Interval for volume increase/decrease (in percent points)
-; Default: 5
 interval = 5
-
-
-[module/covid_tracker]
-type = custom/script
-exec = "$HOME/.config/polybar/covid_tracker.sh"
-interval = 600
 
 ;==================== Weather
 [module/weather]
 type = custom/script
-exec = curl -s wttr.in/hamburg?format=2
+exec = curl -s wttr.in/hamburg?format=1
 interval = 3600
 
 ;====================
@@ -278,112 +208,11 @@ modules-right = filesystem
 scroll-up = herbstclient use_index -1
 scroll-down = herbstclient use_index +1
  
- 
-;====================================================== HL Workspaces
-[module/ewmh]
-type = internal/xworkspaces
- 
-pin-workspaces = true
-enable-click = true
-enable-scroll = true
-reverse-scroll = true
- 
- 
-icon-0 = 1;
-icon-1 = 2;
-icon-2 = 3;
-icon-3 = 4;
-icon-4 = 5;
-#icon-5 = 6;
-format = <label-state>
-label-monitor = %name%
- 
-label-active = %name%
-label-active-foreground = #222
-label-active-background = ${colors.primary}
-;label-active-underline= #6790eb
-label-active-padding = 4
- 
-label-occupied = %name% U
-label-occupied-background = ${colors.red}
-label-occupied-padding = 4
- 
-label-urgent = %name%
-label-urgent-foreground = ${colors.foreground}
-label-urgent-background = ${colors.alert}
-label-urgent-underline = ${colors.alert}
-label-urgent-padding = 4
- 
- 
-label-empty = %name%
-label-empty-foreground = ${colors.foreground}
-label-empty-padding = 4
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
-
-[bar/second]
-monitor = HDMI-0
-width = 100%
-height = 50
-offset-x = 0
-offset-y = 0
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-overline-size = 2
-overline-color = #f00
-underline-size = 2
-underline-color = #00f
-
-border-bottom = 2
-border-bottom-color = #333
-
-spacing = 1
-padding-left = 0
-padding-right = 2
-module-margin-left = 1
-module-margin-right = 2
-
-font-0 = dejavuserif:pixelsize=20;6
-font-1 = "Font Awesome 5 Free Solid:pixelsize=20;7"
-;font-0 = dejavuserif:pixelsize=14;2
-;font-1 = fontawesome:pixelsize=15;3
-font-2 = "Siji:style=Regular"
-font-3 = "Unifont:style=Sans-Serif"
-
-modules-left = i3 xwindow
-modules-center =
-modules-right = volume date
-
 [module/xwindow]
 type = internal/xwindow
 label = %title:0:25:...%
 
-[module/mainHLTag]
-type = custom/script
-exec = /home/jan/.config/polybar/hlwm-monitor-tag.sh 2
-tail = true
-scroll-up = herbstclient use_index -1 --skip-visible &
-scroll-down = herbstclient use_index +1 --skip-visible &
-
-[module/leftHLTag]
-type = custom/script
-exec = herbstclient list_monitors |grep "1:"| cut -d ' ' -f 5|tr -d '"'
-tail = true
-scroll-up = herbstclient use_index -1 --skip-visible &
-scroll-down = herbstclient use_index +1 --skip-visible &
-
-[module/rightHLTag]
-type = custom/script
-exec = herbstclient list_monitors |grep "3:"| cut -d ' ' -f 5|tr -d '"'
-interval= 3
-
-[module/topHLTag]
-type = custom/script
-exec = herbstclient list_monitors |grep "0:"| cut -d ' ' -f 5|tr -d '"'
-interval= 3
-
+; only used with bspwm
 [module/bspwm]
 type = internal/bspwm
 ws-icon-default = x
@@ -404,6 +233,7 @@ label-empty = %index%
 label-empty-foreground = ${colors.foreground-alt}
 label-empty-padding = 2
 
+; only used with i3
 [module/i3]
 type = internal/i3
 format = <label-state> <label-mode>

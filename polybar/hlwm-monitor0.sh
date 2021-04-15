@@ -11,7 +11,7 @@ herbstclient --idle "tag_*" 2>/dev/null | {
             then
                 echo -n "%{B#F27127}"
             fi
-            echo -n "%{A1:herbstclient use $TAG:}  $TAG  %{A -u -o F- B-}"
+            echo -n "%{A1: herbstclient set swap_monitors_to_get_tag 1 && herbstclient use $TAG && herbstclient set swap_monitors_to_get_tag 0:}  $TAG  %{A -u -o F- B-}"
             echo -n "%{B-}"
         done
     echo "    "

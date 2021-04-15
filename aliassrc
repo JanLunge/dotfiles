@@ -1,17 +1,6 @@
 #!/bin/bash
-function updateMusic(){
-  cd ~/Music/Youtube/
-  youtube-dl -f bestaudio --extract-audio --audio-format mp3 --audio-quality 0 --no-post-overwrites -ciwx --embed-thumbnail --add-metadata --download-archive downloaded.txt --output '%(playlist)s/%(title)s - %(id)s.%(ext)s' PLdbIj_aeQsBZnF-dX8Pk_BrU-AidCUP_G
-}
+alias youtube-dl-mp3="youtube-dl --extract-audio --audio-format mp3 "
 
-#create dir and enter it
-function mkd() {
-	mkdir -p "$@" && cd "$_";
-}
-# Change working directory to the top-most Finder window location
-function cdf() { # short for `cdfinder`
-	cd "$(osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)')";
-}
 #finder
 alias hide='chflags hidden'
 alias unhide='chflags nohidden'
@@ -35,13 +24,11 @@ alias gco="git checkout"
 alias glog="git log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all"
 
 #sudo
-alias fuck='sudo $(fc -ln -1)'
+alias fuck='sudo !!'
 alias please='sudo'
 
 #docker
-function undockall {
-    docker stop $(docker ps -a -q)
-}
+alias undockall="docker stop $(docker ps -a -q)"
 alias d="docker"
 alias dc="docker-compose"
 alias dce="docker-compose exec"
@@ -107,9 +94,9 @@ alias showdesktop="defaults write com.apple.finder CreateDesktop -bool true && k
 alias map="xargs -n1"
 
 # One of @janmoesen’s ProTip™s
-for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
-	alias "${method}"="lwp-request -m '${method}'"
-done
+#for method in GET HEAD POST PUT DELETE TRACE OPTIONS; do
+#	alias "${method}"="lwp-request -m '${method}'"
+#done
 
 # Stuff I never really use but cannot delete either because of http://xkcd.com/530/
 alias stfu="osascript -e 'set volume output muted true'"
@@ -140,3 +127,4 @@ alias np='nano -w PKGBUILD'
 alias more=less
 alias hc="herbstclient"
 alias cgrep="grep --color=always"
+alias nosleep="xset s off; xset -dpms"

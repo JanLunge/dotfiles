@@ -16,10 +16,14 @@ PS1="%B%{$fg[red]%}[%{$fg[yellow]%}%~%{$fg[red]%}]%{$reset_color%} $%b "$'\n'"%B
 HISTSIZE=10000
 SAVEHIST=10000
 HISTFILE=~/.cache/zsh/history
+setopt    appendhistory     #Append history to the history file (no overwriting)
+setopt    sharehistory      #Share history across terminals
+setopt    incappendhistory
 
 # Basic auto/tab complete:
 autoload -U compinit
-zstyle ':completion:*' menu select
+#zstyle ':completion:*' menu select
+zstyle ':completion:*' menu select matcher-list 'm:{a-z}={A-Za-z}'
 zmodload zsh/complist
 compinit
 _comp_options+=(globdots)		# Include hidden files.
@@ -28,7 +32,7 @@ _comp_options+=(globdots)		# Include hidden files.
 #bindkey -v
 bindkey -e
 export KEYTIMEOUT=1
-
+export EDITOR=nvim
 # Currently not using vim mode
 # Use vim keys in tab complete menu:
 #bindkey -M menuselect 'h' vi-backward-char
@@ -91,10 +95,13 @@ bindkey -s '^o' 'lfcd\n'
 # Edit line in vim with ctrl-e:
 autoload edit-command-line; zle -N edit-command-line
 bindkey '^e' edit-command-line
+bindkey '^[[1;5D' backward-word
+bindkey '^[[1;5C' forward-word
 
 # Load aliases and shortcuts if existent.
 [ -f "$HOME/.config/shortcutrc" ] && source "$HOME/.config/shortcutrc"
 [ -f "$HOME/dotfiles/aliassrc" ] && source "$HOME/dotfiles/aliassrc"
+[ -f "$HOME/.tokens" ] && source "$HOME/.tokens"
 
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
@@ -113,8 +120,10 @@ PERL_MM_OPT="INSTALL_BASE=/home/jan/perl5"; export PERL_MM_OPT;
 # install lscolors-git from aur
 . /usr/share/LS_COLORS/dircolors.sh
 export TERM="xterm-256color"
-export PATH="$PATH:`yarn global bin`"
+export PATH="$PATH:`yarn global bin`:$HOME/.emacs.d/bin"
 
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
 
 # Load zsh-syntax-highlighting; should be last.
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
