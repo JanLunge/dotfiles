@@ -18,6 +18,7 @@ video walkthrough at [Youtube/JanLunge](https://youtu.be/MOHx2dXb-uk)
 
 ## WIP
 - there is a DISPLAY menu in polybar that is a simple menu with `xmenu` for toggling screens or the compositor on and off
+- Many of my config settings are hardcoded specific to my setup so i can recommend to just copy what you like and adjust it to your needs 
 
 ## Snippets
   `ln -s ~/dotfiles/.zshrc ~/.zshrc` for linking dotfiles to the right place
