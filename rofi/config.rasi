@@ -1,5 +1,5 @@
 configuration {
-modi: "drun,window,run,ssh";
+	modi: "drun,window,run,ssh";
 /*	width: 50;*/
 /*	lines: 15;*/
 	columns: 2;
@@ -53,7 +53,7 @@ sidebar-mode: true;
 /*	window-format: "{w}    {c}   {t}";*/
 /*	click-to-exit: true;*/
 /*	show-match: true;*/
-	theme: "slate.rasi";
+/*	theme: "slate.rasi";*/
 /*	color-normal: ;*/
 /*	color-urgent: ;*/
 /*	color-active: ;*/
@@ -142,4 +142,6 @@ sidebar-mode: true;
 /*	me-select-entry: "MousePrimary";*/
 /*	me-accept-entry: "MouseDPrimary";*/
 /*	me-accept-custom: "Control+MouseDPrimary";*/
+/* theme: "slate.rasi"; */
 }
+@theme "slate.rasi"

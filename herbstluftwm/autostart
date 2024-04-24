@@ -27,7 +27,7 @@ hc keybind $Mod-Shift-r reload
 hc keybind $Mod-Shift-q close
 hc keybind $Mod-Return spawn termite
 # hc keybind $Mod-d spawn rofi -width 1800 -fg "#B0E670" -bg "#2c303b" -hlfg "#14161F" -hlbg "#B0E670" -bc "#2c203b" -location 0 -lines 19 -bw 0 -font "MonacoB 16" -padding 15 -separator-style none -opacity 95 -show drun -modi run,drun,window -show-icons -sidebar-mode
-hc keybind $Mod-d spawn rofi -show drun -modi drun,run,calc
+hc keybind $Mod-d spawn rofi -show drun -modi drun,run
 hc keybind $Mod-t spawn rofi -show window
 hc keybind $Mod-t spawn rofi -modi grab:~/dotfiles/grabwindow.zsh,window -show grab
 hc keybind $Mod-y spawn sh ~/.config/rofi/power.sh
@@ -210,6 +210,7 @@ hc spawn picom
 #hc spawn pkill '^redshift$' && sleep 10s && redshift-gtk -P &
 # set wallpaper either i use feh or nitrogen
 # hc spawn feh --bg-scale ~/walls/beach.jpg
+hc spawn feh --bg-scale Downloads/mike-yukhtenko-wfh8dDlNFOk-unsplash.jpg
 hc spawn nitrogen --restore &
 hc spawn sh $HOME/.config/polybar/launch.sh
 hc spawn /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
