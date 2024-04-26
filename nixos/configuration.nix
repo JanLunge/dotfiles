@@ -11,9 +11,12 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.useOSProber = true;
+  #boot.loader.grub.enable = true;
+  #boot.loader.grub.device = "/dev/sda";
+  #boot.loader.grub.useOSProber = true;
+  
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
   
   programs.fish.enable = true;
  programs.bash = {
@@ -118,8 +121,11 @@
   feh
   polybar
   termite
+  arandr
+  discord
+  vulkan-tools # for testing vulkan support for steam
   # wormhole?
-  
+  jq
   ];
 services.xserver = {
   enable = true;
@@ -133,6 +139,7 @@ services.xserver = {
   windowManager = {
     herbstluftwm.enable = true;
   };
+  videoDrivers = ["nvidia"];
 displayManager = {
   session = [
     { manage = "desktop";
@@ -184,5 +191,7 @@ displayManager = {
   system.stateVersion = "23.11"; # Did you read the comment?
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  
 
 }

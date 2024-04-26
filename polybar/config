@@ -26,7 +26,7 @@ secondary = #f8941f
 alert = #bd2c40
 
 [variables]
-main-monitor=DP-2
+main-monitor=DP-4
 
 ;==================== WM
 [global/wm]
@@ -67,7 +67,7 @@ font-2 = "Siji:style=Regular"
 
 modules-left = info-hlwm-workspaces
 modules-center = hlwm-monitor0
-modules-right = weather monitor_toggle monitor_aspect follows_mouse cpu memory temperature volume date powermenu
+modules-right = weather monitor_toggle monitor_aspect cpu memory temperature volume date powermenu
  
 tray-detached = false
 tray-offset-x = 2
