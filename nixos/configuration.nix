@@ -57,7 +57,7 @@
     LC_TIME = "de_DE.UTF-8";
   };
 
-
+  environment.sessionVariables.EDITOR = "nvim";
   # Enable the GNOME Desktop Environment.
 
   # Configure keymap in X11
@@ -93,7 +93,7 @@
   users.users.jan = {
     isNormalUser = true;
     description = "Jan Lunge";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [
       firefox
     #  thunderbird
@@ -108,6 +108,7 @@
   environment.systemPackages = with pkgs; [
   #  vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
   # wget
+  chromium
   vscode
   vim
   firefox
@@ -124,9 +125,57 @@
   arandr
   discord
   vulkan-tools # for testing vulkan support for steam
+  telegram-desktop
+  docker-compose
   # wormhole?
   jq
-  ];
+  nitrogen
+  neovim
+
+  # AI Stuff
+  # nvidia-smi # for cuda stuff
+  cudatoolkit
+  #zlib
+  #gcc
+  #python311
+  #curl
+  #stdenv.cc.cc.lib
+  #stdenv.cc
+  #ncurses5
+  #binutils
+  #gitRepo gnupg autoconf
+  #procps gnumake util-linux m4 gperf unzip libGLU libGL
+  #glib
+  krita
+  mpv
+  cifs-utils
+  vial
+  htop
+  flameshot
+  killall
+  tree
+  lf
+  pistol
+  starship
+];
+
+services.udev.packages = with pkgs; [
+  vial
+];
+
+#services.dunst.enable = true;
+
+#xdg.portal.extraPortals = [ pkgs.xdg-desktop-portal-gtk ];
+xdg.portal.config.common.default = "gtk";
+services.flatpak.enable = true;
+virtualisation.docker.enable = true;
+virtualisation.podman.enable = true;
+virtualisation.docker.enableNvidia = true;
+fonts.fontDir.enable = true;
+fonts.packages = with pkgs; [
+  mononoki
+(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Mononoki" ]; })
+];
 services.xserver = {
   enable = true;
   serverFlagsSection = 
@@ -162,6 +211,11 @@ displayManager = {
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
+  hardware.opengl.enable = true;
+ systemd.services.nvidia-control-devices = {
+    wantedBy = [ "multi-user.target" ];
+    serviceConfig.ExecStart = "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
+  };
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
