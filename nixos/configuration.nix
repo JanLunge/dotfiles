@@ -62,7 +62,7 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
+    layout = "eu";
     xkbVariant = "";
   };
 
@@ -72,6 +72,7 @@
   # Enable sound with pipewire.
   sound.enable = true;
   hardware.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -157,6 +158,11 @@
   lf
   pistol
   starship
+  pavucontrol
+  spotify
+  jdk21
+  picom
+  
 ];
 
 services.udev.packages = with pkgs; [
@@ -189,20 +195,20 @@ services.xserver = {
     herbstluftwm.enable = true;
   };
   videoDrivers = ["nvidia"];
-displayManager = {
-  session = [
-    { manage = "desktop";
-      name = "herbstluft";
-      start = ''
-        ${pkgs.herbstluftwm}/bin/herbstluftwm --locked &
-        waitPID=$!
-      '';
-    }
-  ];
-  gdm.enable = true;
-  defaultSession = "herbstluft";
-};
+  displayManager = {
+    session = [
+      { manage = "desktop";
+        name = "herbstluft";
+        start = ''
+          ${pkgs.herbstluftwm}/bin/herbstluftwm --locked &
+          waitPID=$!
+        '';
+      }
+    ];
+    gdm.enable = true;
+    defaultSession = "herbstluft";
   };
+};
 
   services.xserver.desktopManager.gnome.enable = true;
   programs.steam = {
@@ -228,7 +234,17 @@ displayManager = {
   # List services that you want to enable:
 
   # Enable the OpenSSH daemon.
-  # services.openssh.enable = true;
+  services.openssh = {
+  enable = true;
+  ports = [ 22 ];
+  settings = {
+    PasswordAuthentication = true;
+    AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
+    UseDns = true;
+    X11Forwarding = false;
+    PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
+  };
+};
 
   # Open ports in the firewall.
   # networking.firewall.allowedTCPPorts = [ ... ];
@@ -246,6 +262,7 @@ displayManager = {
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
-  
+
+
 
 }
