@@ -22,12 +22,12 @@
 					  	# Use unstable package
           				({ config, pkgs, ... }: {
             			environment.systemPackages = with pkgs; [
-             
-              # Package from nixpkgs-unstable
-              (import nixpkgs-unstable { inherit system; }).pinokio
-            ];
-          })
-		   ];
+						 
+						  # Package from nixpkgs-unstable
+						  (import nixpkgs-unstable { inherit system; }).pinokio
+						];
+					  })
+				   ];
 				};
 			};
 			homeConfigurations = {
