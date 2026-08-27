@@ -19,6 +19,10 @@
   boot.loader.efi.canTouchEfiVariables = true;
   
   programs.fish.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
  programs.bash = {
   interactiveShellInit = ''
     if [[ $(${pkgs.procps}/bin/ps --no-header --pid=$PPID --format=comm) != "fish" && -z ''${BASH_EXECUTION_STRING} ]]
@@ -61,17 +65,16 @@
   # Enable the GNOME Desktop Environment.
 
   # Configure keymap in X11
-  services.xserver = {
+  services.xserver.xkb = {
     layout = "eu";
-    xkbVariant = "";
+    variant = "";
   };
 
   # Enable CUPS to print documents.
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  sound.enable = true;
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
 
   security.rtkit.enable = true;
   services.pipewire = {
@@ -123,7 +126,15 @@
   rofi
   feh
   polybar
-  termite
+  alacritty
+  waybar
+  wofi
+  mako
+  hyprpaper
+  hyprlock
+  grim
+  slurp
+  wl-clipboard
   arandr
   discord
   vulkan-tools # for testing vulkan support for steam
@@ -163,6 +174,25 @@
   spotify
   jdk21
   picom
+
+  # T3 Code, Codex, Electron and worktree development tooling.
+  nodejs_24
+  corepack
+  pnpm
+  yarn
+  bun
+  electron
+  codex
+  gh
+  direnv
+  nix-direnv
+  ripgrep
+  fd
+  gcc
+  gnumake
+  python3
+  pkg-config
+  openssl
   
 ];
 
@@ -177,11 +207,13 @@ xdg.portal.config.common.default = "gtk";
 services.flatpak.enable = true;
 virtualisation.docker.enable = true;
 virtualisation.podman.enable = true;
-virtualisation.docker.enableNvidia = true;
+hardware.nvidia-container-toolkit.enable = true;
 fonts.fontDir.enable = true;
 fonts.packages = with pkgs; [
   mononoki
-(nerdfonts.override { fonts = [ "FiraCode" "DroidSansMono" "Mononoki" ]; })
+  nerd-fonts.fira-code
+  nerd-fonts.droid-sans-mono
+  nerd-fonts.mononoki
 ];
 services.xserver = {
   enable = true;
@@ -196,29 +228,40 @@ services.xserver = {
     herbstluftwm.enable = true;
   };
   videoDrivers = ["nvidia"];
-  displayManager = {
-    session = [
-      { manage = "desktop";
-        name = "herbstluft";
-        start = ''
-          ${pkgs.herbstluftwm}/bin/herbstluftwm --locked &
-          waitPID=$!
-        '';
-      }
-    ];
+  displayManager.session = [
+    { manage = "desktop";
+      name = "herbstluft";
+      start = ''
+        ${pkgs.herbstluftwm}/bin/herbstluftwm --locked &
+        waitPID=$!
+      '';
+    }
+  ];
+};
+
+  # Keep GNOME/herbstluft available and add Hyprland as another GDM session.
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
+  };
+
+  services.displayManager = {
     gdm.enable = true;
     defaultSession = "herbstluft";
   };
-};
-
-  services.xserver.desktopManager.gnome.enable = true;
+  services.desktopManager.gnome.enable = true;
   programs.steam = {
     enable = true;
     remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
     dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
   };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
+  hardware.nvidia = {
+    modesetting.enable = true;
+    open = false;
+    package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
+  };
  systemd.services.nvidia-control-devices = {
     wantedBy = [ "multi-user.target" ];
     serviceConfig.ExecStart = "${pkgs.linuxPackages.nvidia_x11.bin}/bin/nvidia-smi";
@@ -234,13 +277,14 @@ services.xserver = {
 
   # List services that you want to enable:
 
+  services.tailscale.enable = true;
+
   # Enable the OpenSSH daemon.
   services.openssh = {
   enable = true;
   ports = [ 22 ];
   settings = {
     PasswordAuthentication = true;
-    AllowUsers = null; # Allows all users by default. Can be [ "user1" "user2" ]
     UseDns = true;
     X11Forwarding = false;
     PermitRootLogin = "prohibit-password"; # "yes", "without-password", "prohibit-password", "forced-commands-only", "no"
