@@ -2,8 +2,8 @@
 MONSTR=""
 MONOFFSET=0
 
-MONLEFT="DP-2"
-MONCENTER="DP-4"
+MONLEFT="DP-4"
+MONCENTER="DP-2"
 MONTV="HDMI-0"
 
 # TODO: if monitor settings file doesnt exist create it, with default settings
@@ -55,7 +55,7 @@ done
 
 
 tvenable=$( cat ~/.config/monitorsettings.json | jq .tv.enable -r )
-if [ $tvenable="true" ]; then
+if [ $tvenable == "true" ]; then
 # mode for zoomed screens on one of the desks
 zoom=$( cat ~/.config/monitorsettings.json | jq .tv.zoom -r )
   if [ $zoom = "zoomed" ]; then
