@@ -278,6 +278,11 @@ services.xserver = {
   # List services that you want to enable:
 
   services.tailscale.enable = true;
+  # Update only Tailscale; keep the rest of the system on the existing nixpkgs.
+  services.tailscale.package = (import (builtins.fetchTarball {
+    url = "https://github.com/NixOS/nixpkgs/archive/31ecbaca1bdefa45dffc409f0250bd8039ea0010.tar.gz";
+    sha256 = "sha256-dhoW6VgFWlaodSY5jrBn+CF2FLmaUvDVgM7+C7T2+NM=";
+  }) { system = pkgs.stdenv.hostPlatform.system; }).tailscale;
 
   # Enable the OpenSSH daemon.
   services.openssh = {
