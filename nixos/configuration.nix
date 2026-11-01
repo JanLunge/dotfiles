@@ -285,6 +285,12 @@ services.xserver = {
     # Public half of the paper recovery key ("public: age1..." in 1Password).
     # Only read when the store is first created.
     recoveryRecipients = [ "age1n5xu3ca52hrllw37r2sxjkqc7elay0yal3rzuwttq85z78txdvhsjm7687" ];
+    # Sync with the other daemons over the tailnet (port 7450, tailscale0 only).
+    # New machines show up under "secretd admin pending" until approved here.
+    replication = {
+      enable = true;
+      peers = [ "100.86.51.61:7450" ]; # wBook
+    };
   };
 
   services.tailscale.enable = true;

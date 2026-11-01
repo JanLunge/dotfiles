@@ -51,11 +51,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793534641,
-        "narHash": "sha256-BNIN83qFpq/rLbYGjItYOA4Iw4py1XCOgP/0nq4vFqg=",
+        "lastModified": 1793541531,
+        "narHash": "sha256-rw0sa15cYjPXFoTkUwSPMSyAk0QTU6e9lNciRl8CDcE=",
         "ref": "main",
-        "rev": "513e7203454246eb455c22e20fca14634e694b50",
-        "revCount": 16,
+        "rev": "9799687174bc0a1cec114c899eebdcae5b96afa7",
+        "revCount": 24,
         "type": "git",
         "url": "file:///home/jan/Code/secretd"
       },
