@@ -284,7 +284,7 @@ services.xserver = {
     allowUsers = [ "jan" ];
     # Public half of the paper recovery key ("public: age1..." in 1Password).
     # Only read when the store is first created.
-    recoveryRecipients = [ ];
+    recoveryRecipients = [ "age1n5xu3ca52hrllw37r2sxjkqc7elay0yal3rzuwttq85z78txdvhsjm7687" ];
   };
 
   services.tailscale.enable = true;
