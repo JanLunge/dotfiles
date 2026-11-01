@@ -40,7 +40,29 @@
     "root": {
       "inputs": {
         "home-manager": "home-manager",
-        "nixpkgs": "nixpkgs"
+        "nixpkgs": "nixpkgs",
+        "secretd": "secretd"
+      }
+    },
+    "secretd": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1793533381,
+        "narHash": "sha256-gwMVN403kGxD451QTGRD1G8PVDIiXPvOiP/uHd0Qlek=",
+        "ref": "feat/nixos",
+        "rev": "911ecbadd2dff13343a989ff470c9df54323ecf7",
+        "revCount": 20,
+        "type": "git",
+        "url": "file:///home/jan/Code/secretd"
+      },
+      "original": {
+        "ref": "feat/nixos",
+        "type": "git",
+        "url": "file:///home/jan/Code/secretd"
       }
     }
   },

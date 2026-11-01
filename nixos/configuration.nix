@@ -277,6 +277,16 @@ services.xserver = {
 
   # List services that you want to enable:
 
+  # Secret store for agents: runs as its own user, so jan can use secrets
+  # through sec but cannot read the store. See ~/Code/secretd/README.md.
+  services.secretd = {
+    enable = true;
+    allowUsers = [ "jan" ];
+    # Public half of the paper recovery key ("public: age1..." in 1Password).
+    # Only read when the store is first created.
+    recoveryRecipients = [ ];
+  };
+
   services.tailscale.enable = true;
 
   # Enable the OpenSSH daemon.
