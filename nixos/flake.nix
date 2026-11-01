@@ -6,7 +6,7 @@
 		home-manager.url = "github:nix-community/home-manager/release-26.05";
 		home-manager.inputs.nixpkgs.follows = "nixpkgs";
 		# Secret store for agents (github.com/JanLunge/secretd, private; local checkout).
-		secretd.url = "git+file:///home/jan/Code/secretd?ref=feat/nixos";
+		secretd.url = "git+file:///home/jan/Code/secretd?ref=main";
 		secretd.inputs.nixpkgs.follows = "nixpkgs";
   };
 

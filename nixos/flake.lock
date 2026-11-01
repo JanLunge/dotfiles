@@ -51,16 +51,16 @@
         ]
       },
       "locked": {
-        "lastModified": 1793534194,
+        "lastModified": 1793534641,
         "narHash": "sha256-BNIN83qFpq/rLbYGjItYOA4Iw4py1XCOgP/0nq4vFqg=",
-        "ref": "feat/nixos",
-        "rev": "3ebde73b696619079e2900c0c6d78d0c276161fd",
-        "revCount": 22,
+        "ref": "main",
+        "rev": "513e7203454246eb455c22e20fca14634e694b50",
+        "revCount": 16,
         "type": "git",
         "url": "file:///home/jan/Code/secretd"
       },
       "original": {
-        "ref": "feat/nixos",
+        "ref": "main",
         "type": "git",
         "url": "file:///home/jan/Code/secretd"
       }
