@@ -51,11 +51,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1793533381,
-        "narHash": "sha256-gwMVN403kGxD451QTGRD1G8PVDIiXPvOiP/uHd0Qlek=",
+        "lastModified": 1793534194,
+        "narHash": "sha256-BNIN83qFpq/rLbYGjItYOA4Iw4py1XCOgP/0nq4vFqg=",
         "ref": "feat/nixos",
-        "rev": "911ecbadd2dff13343a989ff470c9df54323ecf7",
-        "revCount": 20,
+        "rev": "3ebde73b696619079e2900c0c6d78d0c276161fd",
+        "revCount": 22,
         "type": "git",
         "url": "file:///home/jan/Code/secretd"
       },
